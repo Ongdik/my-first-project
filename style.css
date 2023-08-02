@@ -1,0 +1,29 @@
+body {
+    width: fit-content;
+    margin:auto;
+}
+h1 {
+    text-align: center;
+    color:cadetblue;
+}
+.clickDay {
+    color:blue;
+}
+#allText {
+    border: 1px solid black;
+    padding:20px;
+}
+div {
+    text-align: center;
+}
+.genderBtn {
+    padding:10px;
+}
+button {
+    background-color: transparent;
+    color: black;
+    border: 1px solid black;
+    padding: 5px 10px;
+    cursor: pointer;
+    outline: none;
+}

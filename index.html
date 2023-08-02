@@ -4,115 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BMR</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="avg.js"></script>
 </head>
 <body>
     <h1>기초대사량 확인</h1>
     <p></p>
 
-    <script>
-        var selectedGender = "";
-        var selectedValue = 0;
-        var BMR = 0;
-        var height = 0;
-        var weight = 0;
-        var age = 0;
-
-        function changeGender(gender) {
-            selectedGender = gender;
-        }
+    <div id="allText">
+        <div class="genderBtn">
+            <button id="man" type="button" value="man" onclick="changeGender('man'); clickedBtn(this)">남자</button>
+            <button id="woman" type="button" value="woman" onclick="changeGender('woman'); clickedBtn(this)">여자</button>
+        </div>
         
-        function changeValue(value) {
-            selectedValue = value;
-        }
-
-        function enterEvent() {
-            height = parseFloat(document.getElementById("height").value);
-            weight = parseFloat(document.getElementById("weight").value);
-            age = parseFloat(document.getElementById("age").value);
-        }
-
-        function calculatorBMR() {
-            if (selectedGender === "man") {
-                BMR = ((10*weight)+(6.25*height)-(5*age)+5);
-            } 
-            else {
-                BMR = ((10*weight)+(6.25*height)-(5*age)-161);
-            }
-            if (selectedValue === 1) {
-                BMR *= 1.2;
-            }
-            else if (selectedValue === 2) {
-                BMR *= 1.375;
-            }
-            else if (selectedValue === 3) {
-                BMR *= 1.55;
-            }
-            else if (selectedValue === 4) {
-                BMR *= 1.725;
-            }
-            else if (selectedValue === 5) {
-                BMR *= 1.9;
-            }
-
-            document.getElementById("bmrResult").innerHTML = "계산한 BMR: " + BMR.toFixed(2);
-        }
-        
-        calculatorBMR();
-    </script>
-    <div>
-        <button type="button" value="man" onclick="changeGender('man')">남자</button>
-        <button type="button" value="woman" onclick="changeGender('woman')">여자</button>
-    </div>
+        <div>
+            <li>
+                키 <input id="height" type="text" onblur="onblurEvent()">
+            </li>
+            <li>
+                체중 <input id="weight" type="text" onblur="onblurEvent()">
+            </li>
+            <li>
+                나이 <input id="age" type="text" onblur="onblurEvent()">
+            </li>
+        </div>
     
-    <div>
-        <li>
-            키 <input id="height" type="text" onkeypress="enterEvent()">
-        </li>
-        <li>
-            체중 <input id="weight" type="text" onkeypress="enterEvent()">
-        </li>
-        <li>
-            나이 <input id="age" type="text" onkeypress="enterEvent()">
-        </li>
+        <p></p>
+    
+        <div class="clickDay" id="dayBtn">
+            <button type="button" id="1" value="1" onclick="changeValue(1); 
+            clickedDayBtn(this)">0~1일</button>
+            <button type="button" id="2" value="2" onclick="changeValue(2);
+            clickedDayBtn(this)">1~3일</button>
+            <button type="button" id="3" value="3" onclick="changeValue(3);
+            clickedDayBtn(this)">3~4일</button>
+            <button type="button" id="4" value="4" onclick="changeValue(4);
+            clickedDayBtn(this)">4~5일</button>
+            <button type="button" id="5" value="5" onclick="changeValue(5);
+            clickedDayBtn(this)">6~7일</button>
+        </div>
+    
+        <p></p>
+        <div>
+            <p>평균 기초 대사량</p>
+        </div>
+    
+        <p id="avgResult"></p>
+        <script>
+            printAvg();
+        </script>
+      
+        <div class="calBtn">
+            <p><button type="button" onclick="calculatorBMR()">
+                Calculate BMR</button></p>
+        </div>
+        <p><strong id="bmrResult"></strong></p>
+    
     </div>
-
-    <p></p>
-
-    <div>
-        <button type="button" value="1" onclick="changeValue(1)">0~1일</button>
-        <button type="button" value="2" onclick="changeValue(2)">1~3일</button>
-        <button type="button" value="3" onclick="changeValue(3)">3~4일</button>
-        <button type="button" value="4" onclick="changeValue(4)">4~5일</button>
-        <button type="button" value="5" onclick="changeValue(5)">6~7일</button>
-    </div>
-
-    <p></p>
-    <p>평균 기초 대사량</p>
-    <script>
-        var avgAge = ["20~29의 평균 : ", "30~49의 평균 : ", "50이상의 평균 : "];
-        var avgMan = [1728, 1669.5, 1493.8];
-        var avgWoman = [1311.5, 1316.8, 1252.5];
-        var devMan = [368.2, 302.1, 315.3];
-        var devWoman = [233.0, 225.9, 228.6];
-
-        function printAvgMan() {
-            document.write('<strong>남자<br></strong>');
-            for (var i=0; i<avgAge.length; i++) {
-                document.write(avgAge[i] + avgMan[i] + ' += ' + devMan[i] + 'kcal<br>');
-            }
-        }
-        function printAvgWoman() {
-            document.write('<strong>여자<br></strong>');
-            for (var i=0; i<avgAge.length; i++) {
-                document.write(avgAge[i] + avgWoman[i] + ' += ' + devWoman[i] + 'kcal<br>');
-            }
-        }
-        printAvgMan();
-        document.write('<br>');
-        printAvgWoman();
-    </script>
-
-    <p><button type="button" onclick="calculatorBMR()">Calculate BMR</button></p>
-    <p id="bmrResult"></p>
 </body>
 </html>
